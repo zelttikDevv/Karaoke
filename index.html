@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Karaoke Profesional</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="controls-panel">
+        <input type="text" id="song-input" placeholder="Pega el ID o URL de YouTube...">
+    </div>
+
+    <div class="karaoke-stage">
+        <div class="lyric-line" id="line-prev"></div>
+        <div class="lyric-line active" id="line-current">Cargando sistema...</div>
+        <div class="lyric-line" id="line-next"></div>
+    </div>
+
+    <!-- Contenedor del Iframe de YouTube -->
+    <div id="yt-player-raw"></div>
+
+    <!-- Scripts de inicialización -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="app.js"></script>
+</body>
+</html>
