@@ -1,0 +1,94 @@
+:root {
+    --bg-dark: #060709;
+    --neon-glow: #00f3ff;
+    --text-dim: rgba(255, 255, 255, 0.15);
+    --text-active: #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-dark);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Buscador y Controles */
+.controls-panel {
+    position: absolute;
+    top: 40px;
+    z-index: 10;
+    display: flex;
+    gap: 15px;
+}
+
+input {
+    padding: 14px 25px;
+    width: 320px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    border-radius: 30px;
+    outline: none;
+    font-size: 16px;
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: var(--neon-glow);
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+}
+
+/* Ocultar el reproductor de YouTube pero mantenerlo funcional */
+#yt-player-raw {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    height: 120px;
+    opacity: 0.3; /* Déjalo visible al mínimo para interactuar si es necesario */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: opacity 0.3s;
+}
+#yt-player-raw:hover { opacity: 1; }
+
+/* Escenario del Karaoke */
+.karaoke-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    width: 90%;
+    max-width: 900px;
+    height: 400px;
+    text-align: center;
+}
+
+.lyric-line {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-dim);
+    transition: all 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    filter: blur(1px);
+    transform: scale(0.92);
+    will-change: transform, opacity, filter;
+}
+
+/* Estado de la línea principal activa */
+.lyric-line.active {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--text-active);
+    filter: blur(0px);
+    transform: scale(1.05);
+    text-shadow: 0 0 20px var(--neon-glow), 0 0 40px rgba(0, 243, 255, 0.5);
+}
