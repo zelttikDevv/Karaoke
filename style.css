@@ -53,12 +53,15 @@ input:focus {
     right: 20px;
     width: 200px;
     height: 120px;
-    opacity: 0.3; /* Déjalo visible al mínimo para interactuar si es necesario */
+    opacity: 0.3; /* Mínima opacidad por si requieres interactuar en desarrollo */
     border-radius: 8px;
     overflow: hidden;
     transition: opacity 0.3s;
 }
-#yt-player-raw:hover { opacity: 1; }
+
+#yt-player-raw:hover { 
+    opacity: 1; 
+}
 
 /* Escenario del Karaoke */
 .karaoke-stage {
@@ -83,12 +86,37 @@ input:focus {
     will-change: transform, opacity, filter;
 }
 
-/* Estado de la línea principal activa */
+/* Línea activa modificada para soportar barrido por palabra */
 .lyric-line.active {
-    font-size: 42px;
+    font-size: 44px;
     font-weight: 700;
-    color: var(--text-active);
     filter: blur(0px);
     transform: scale(1.05);
-    text-shadow: 0 0 20px var(--neon-glow), 0 0 40px rgba(0, 243, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px; /* Espaciado entre palabras */
+}
+
+/* Estructura de cada palabra individual */
+.karaoke-word {
+    position: relative;
+    color: rgba(255, 255, 255, 0.25); /* Color de la palabra antes de ser cantada */
+    display: inline-block;
+    will-change: clip-path;
+}
+
+/* La capa de neón superpuesta que tiñe la palabra */
+.karaoke-word::after {
+    content: attr(data-word); /* Clona el texto de la palabra automáticamente */
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--text-active);
+    text-shadow: 0 0 15px var(--neon-glow), 0 0 30px rgba(0, 243, 255, 0.6);
+    white-space: nowrap;
+    
+    /* Controlamos qué tanto se muestra la capa brillante de izquierda a derecha */
+    clip-path: inset(0 var(--progress, 100%) 0 0); 
+    transition: clip-path 0.1s linear; /* Suaviza el barrido entre frames del intervalo */
 }
